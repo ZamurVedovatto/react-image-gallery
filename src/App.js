@@ -18,11 +18,12 @@ function App() {
       .catch(err => console.log(err));
     }
     fetchData();
-  }, [])
+  }, [term])
 
   return (
     <div style={style.container} className="container mx-auto">
-      <ImageSearch />
+      <ImageSearch setSearchText={(text) => setTerm(text)} />
+      {!isLoading && images.length === 0 && <h1 className="text-4xl text-center mx-auto mt-32">No images found</h1>}
       {isLoading ? <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1> : <div className="grid grid-cols-3 gap-4">
         {images.map(image => (
           <ImageCard key={image.id} image={image} />
